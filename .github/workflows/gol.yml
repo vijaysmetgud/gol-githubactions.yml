@@ -38,7 +38,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'adoptium'
+          distribution: 'zulu'
 
       - name: Run Maven Build
         run: mvn ${{ github.event.inputs.GOAL }}  # Use the GOAL input from workflow_dispatch
