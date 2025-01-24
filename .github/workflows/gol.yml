@@ -9,6 +9,18 @@ on:
       - main
   schedule:
     - cron: "*/1 * * * *"  # Polls SCM every minute
+  workflow_dispatch:  # Allow manual triggering of workflow with input
+    inputs:
+      GOAL:
+        description: 'Choose the Maven Goal'
+        required: true
+        default: 'install'
+        type: choice
+        options:
+          - 'package'
+          - 'clean package'
+          - 'validate'
+          - 'install'
 
 jobs:
   build:
@@ -22,20 +34,14 @@ jobs:
         with:
           ref: main
 
-      - name: Run actions/setup-java@v3
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
         with:
-          java-version: 8
+          java-version: '8'
           java-package: jdk
-          check-latest: false
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-          overwrite-settings: true
-          job-status: success
-          token: ***
 
       - name: Run Maven Build
-        run: mvn ${{ github.event.inputs.GOAL }}  # Access parameterized GOAL here if needed
+        run: mvn ${{ github.event.inputs.GOAL }}  # Use the GOAL input from workflow_dispatch
 
       - name: Archive WAR artifacts
         uses: actions/upload-artifact@v3
@@ -52,15 +58,21 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     needs: build
-    if: success() || failure()
+    if: always()  # Trigger this step regardless of the build outcome
 
     steps:
       - name: Send success/failure email notification
-        run: |
-          subject="${{ job.status }}: ${GITHUB_JOB} has completed"
-          body="Hi, this GitHub Actions job \n Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          
-          # Use an email sending service or GitHub Actions SMTP email action here
-          echo "Sending email... (you can integrate email service here)"
-          echo "Subject: $subject"
-          echo "Body: $body"
+        uses: dawidd6/action-send-mail@v3
+        with:
+          from: 'vijay1399@gmail.com'   # Update with your email
+          to: 'vijaymetgud9@gmail.com'      # Update with recipient email
+          subject: "${{ job.status }}: Build Status - ${{ github.repository }}"
+          body: |
+            Hi, this GitHub Actions job has completed.
+            Build Status: ${{ job.status }}
+            Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          server_address: 'smtp.example.com'   # Update with your SMTP server address
+          server_port: 587                     # Update with your SMTP server port
+          username: ${{ secrets.SMTP_USERNAME }}  # Store your SMTP username in GitHub Secrets
+          password: ${{ secrets.SMTP_PASSWORD }}  # Store your SMTP password in GitHub Secrets
+          secure: true
