@@ -8,7 +8,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "*/1 * * * *"  # Polls SCM every minute
+    - cron: "*/1 * * * *"  # Poll SCM every minute
   workflow_dispatch:  # Allow manual triggering of workflow with input
     inputs:
       GOAL:
@@ -38,10 +38,10 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'zulu'
+          distribution: 'zulu'  # Use Zulu OpenJDK (could be 'adoptopenjdk' as well)
 
       - name: Run Maven Build
-        run: mvn ${{ github.event.inputs.GOAL }}  # Use the GOAL input from workflow_dispatch
+        run: mvn ${{ github.event.inputs.GOAL || 'install' }}  # Default to 'install' if GOAL is not provided
 
       - name: Archive WAR artifacts
         uses: actions/upload-artifact@v3
