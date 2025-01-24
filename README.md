@@ -1,0 +1,2 @@
+# gol-githubactions.yml
+demogol
