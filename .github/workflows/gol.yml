@@ -14,7 +14,7 @@ on:
       GOAL:
         description: 'Choose the Maven Goal'
         required: true
-        default: 'package'
+        default: 'install'
         type: choice
         options:
           - 'package'
@@ -40,8 +40,11 @@ jobs:
           java-version: '8'
           distribution: 'zulu'  # Use Zulu OpenJDK (could be 'adoptopenjdk' as well)
 
+      - name: Change directory to project folder
+        run: cd my-project  # Change to the directory where your pom.xml is located
+
       - name: Run Maven Build
-        run: mvn ${{ github.event.inputs.GOAL || 'package' }}  # Default to 'install' if GOAL is not provided
+        run: mvn ${{ github.event.inputs.GOAL || 'install' }}  # Default to 'install' if GOAL is not provided
 
       - name: Archive WAR artifacts
         uses: actions/upload-artifact@v3
