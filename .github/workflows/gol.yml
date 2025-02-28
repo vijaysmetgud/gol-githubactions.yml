@@ -44,13 +44,13 @@ jobs:
         run: mvn ${{ github.event.inputs.GOAL || 'clean package' }}  # Default to 'install' if GOAL is not provided
 
       - name: Archive WAR artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: gameoflife.war
           path: '**/target/gameoflife.war'
 
       - name: Publish JUnit test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: junit-test-results
           path: '**/surefire-reports/TEST-*.xml'
