@@ -40,9 +40,6 @@ jobs:
           java-version: '8'
           distribution: 'zulu'  # Use Zulu OpenJDK (could be 'adoptopenjdk' as well)
 
-      - name: Run Maven Build
-  run: 'mvn clean package'
-  working-directory: /home/runner/work/*.xml # Change 'my-app' to the correct folder
 
       - name: Archive WAR artifacts
         uses: actions/upload-artifact@v4
