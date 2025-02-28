@@ -60,22 +60,22 @@ jobs:
 
     steps:
       - name: Send success/failure email notification
-        uses: dawidd6/action-send-mail@v4
-        with:
-          from: vijay1399@gmail.com
-          to: vijaymetgud9@gmail.com
-          subject: "${{ job.status }}: Build Status - ${{ github.repository }}"
-          body: |
-            Hi, this GitHub Actions job has completed.
-            Build Status: ${{ job.status }}
-            Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          server_address: smtp.gmail.com    # Gmail SMTP server address
-          server_port: 465                 # Port 587 for TLS
-          secure: true
-          username: ${{ secrets.SMTP_USERNAME }}  # Store your Gmail username in GitHub Secrets
-          password: ${{ secrets.SMTP_PASSWORD }}  # Store your Gmail app-specific password in GitHub Secrets
+  uses: dawidd6/action-send-mail@v4
+  with:
+    from: vijay1399@gmail.com
+    to: vijaymetgud9@gmail.com
+    subject: "${{ job.status }}: Build Status - ${{ github.repository }}"
+    body: |
+      Hi, this GitHub Actions job has completed.
+      Build Status: ${{ job.status }}
+      Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    server_address: smtp.gmail.com
+    server_port: 587
+    secure: true
+    username: ${{ secrets.SMTP_USERNAME }}  # This should be your full Gmail address
+    password: ${{ secrets.SMTP_PASSWORD }}  # Use the App Password from Google
 
-
+      
 
 
 
