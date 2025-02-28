@@ -76,3 +76,4 @@ jobs:
           secure: true
           username: ${{ secrets.SMTP_USERNAME }}  # Store your Gmail username in GitHub Secrets
           password: ${{ secrets.SMTP_PASSWORD }}  # Store your Gmail app-specific password in GitHub Secrets
+
