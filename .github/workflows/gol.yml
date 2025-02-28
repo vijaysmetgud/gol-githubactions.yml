@@ -62,7 +62,7 @@ jobs:
       - name: Send success/failure email notification
         uses: dawidd6/action-send-mail@v4
         with:
-          from: vijay1399@gmail.com
+          from: vijaymetgud9@gmail.com
           to: vijaymetgud9@gmail.com
           subject: "${{ job.status }}: Build Status - ${{ github.repository }}"
           body: |
