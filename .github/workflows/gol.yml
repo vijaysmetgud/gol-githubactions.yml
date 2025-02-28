@@ -70,7 +70,7 @@ jobs:
       Build Status: ${{ job.status }}
       Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     server_address: smtp.gmail.com
-    server_port: 587
+    server_port: 465
     secure: true
     username: ${{ secrets.SMTP_USERNAME }}  # This should be your full Gmail address
     password: ${{ secrets.SMTP_PASSWORD }}  # Use the App Password from Google
