@@ -70,8 +70,8 @@ jobs:
             Build Status: ${{ job.status }}
             Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           server_address: smtp.gmail.com    # Gmail SMTP server address
-          server_port: 587                  # Port 587 for TLS
-          secure: false
+          server_port: 465                 # Port 587 for TLS
+          secure: true
           username: ${{ secrets.SMTP_USERNAME }}  # Store your Gmail username in GitHub Secrets
           password: ${{ secrets.SMTP_PASSWORD }}  # Store your Gmail app-specific password in GitHub Secrets
 
