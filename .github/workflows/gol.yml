@@ -41,7 +41,8 @@ jobs:
           distribution: 'zulu'  # Use Zulu OpenJDK (could be 'adoptopenjdk' as well)
 
       - name: Run Maven Build
-        run: mvn ${{ github.event.inputs.GOAL || 'clean package' }}  # Default to 'install' if GOAL is not provided
+  run: mvn "${{ github.event.inputs.GOAL || 'clean package' }}"
+  working-directory: my-app
 
       - name: Archive WAR artifacts
         uses: actions/upload-artifact@v4
