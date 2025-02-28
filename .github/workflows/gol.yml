@@ -70,15 +70,10 @@ jobs:
             Build Status: ${{ job.status }}
             Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           server_address: smtp.gmail.com
-          server_port: 587  # Use TLS (465 is for SSL, which may cause issues)
-          secure: true
+          server_port: 587
+          secure: false  # Set to false to force STARTTLS
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-
-
-
-
-
 
 
 
