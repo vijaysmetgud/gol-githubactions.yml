@@ -41,7 +41,7 @@ jobs:
           distribution: 'zulu'  # Use Zulu OpenJDK (could be 'adoptopenjdk' as well)
 
       - name: Run Maven Build
-  run: mvn -e -X "${{ github.event.inputs.GOAL || 'clean package' }}"
+  run: 'mvn clean package'
   working-directory: /home/runner/work/*.xml # Change 'my-app' to the correct folder
 
       - name: Archive WAR artifacts
