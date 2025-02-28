@@ -71,7 +71,7 @@ jobs:
             Build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           server_address: smtp.gmail.com
           server_port: 587
-          secure: true  # Set to false to force STARTTLS
+          secure: false  # Set to false to force STARTTLS
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
 
