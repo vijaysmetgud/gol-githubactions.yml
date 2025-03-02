@@ -8,7 +8,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "*/1 * * * *"  # Poll SCM every minute
+    - cron: "* 12 * * *"  # Poll SCM every minute
   workflow_dispatch:  # Allow manual triggering of workflow with input
     inputs:
       GOAL:
